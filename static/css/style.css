@@ -1,0 +1,39 @@
+
+
+  
+  .centered-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .centered-form .card {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+  }
+  
+  label {
+    color: #fff;
+  }
+  
+  .fa-check {
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .order-sent {
+    background-color: #28a745;
+    color: #fff;
+    border-color: #28a745;
+  }
+  
+  .order-sent .fa-check {
+    display: inline-block;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
