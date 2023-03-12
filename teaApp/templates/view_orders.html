@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Form</title>
+    <title>View Orders</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Custom CSS -->
@@ -14,11 +14,22 @@
 
     <style>
         body {
-    background-image: url("{% static 'images/bg.jpg' %}" );
-    background-size: cover;
-    background-attachment: fixed;
-  }
-    </style>
+          background-image: url("{% static 'images/bg.jpg' %}" );
+          background-size: cover;
+          background-attachment: fixed;
+        }
+        
+        .container {
+          background-color: rgba(0, 0, 0, 0.8);
+          color: white;
+          padding: 20px;
+        }
+        
+        table {
+          color: white;
+        }
+      </style>
+      
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Tea Time</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,35 +37,47 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Order</a>
-          </li>
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Order</a>
+          </li>
+          <li class="nav-item active">
             <a class="nav-link" href="{% url 'view_orders' %}">View Orders</a>
           </li>
         </ul>
       </div>
-    </nav>
-
+    </nav><br><br><br>
+    
     <div class="container">
-      <div class="row centered-form">
-        <div class="col-md-6">
-          <div class="card">
-            <form method="POST">{%csrf_token%}
-              <div class="form-group">
-                <label for="input1">Name On Order</label>
-                <input type="text" class="form-control" id="input1" name="name">
-              </div>
-              <div class="form-group">
-                <label for="input2">Order</label>
-                <input type="text" class="form-control" id="input2" name="order">
-              </div>
-              <button type="submit" class="btn btn-primary" id="order-btn" onclick="sendOrder()">Place Order</button>
-            </form>
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center">View Orders</h1>
+            <div class="text-center">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Name on Order</th>
+                    <th>Order</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in orders %}
+                    <tr>
+                      <td>{{ order.name }}</td>
+                      <td>{{ order.order }}</td>
+                    </tr>
+                  {% empty %}
+                    <tr>
+                      <td colspan="2" class="text-center">No orders found.</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      
+
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/c474ed3681.js" crossorigin="anonymous"></script>
     <!-- jQuery -->
