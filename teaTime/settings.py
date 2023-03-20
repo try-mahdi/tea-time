@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-fnc_gjz(dn06=%p1hr1y2c=9wehz!m552+6&^5$ubv7*bvnani
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -124,6 +124,8 @@ MEDIA_URL = 'images/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
