@@ -5,6 +5,8 @@
   <head>
     <meta charset="UTF-8">
     <title>My Form</title>
+    <!-- Add the viewport meta tag for responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Custom CSS -->
@@ -13,19 +15,21 @@
   <body>
 
     <style>
-        body {
-    background-image: url("{% static 'images/bg.jpg' %}" );
-    background-size: cover;
-    background-attachment: fixed;
-  }
+      body {
+        background-image: url("{% static 'images/bg.jpg' %}");
+        background-size: cover;
+        background-attachment: fixed;
+      }
     </style>
+    
+    <!-- Use the Bootstrap responsive navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Tea Time</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="#">Order</a>
           </li>
@@ -36,15 +40,17 @@
       </div>
     </nav>
 
-    <div class="container">
+    <!-- Use the Bootstrap container class for responsiveness -->
+    <div class="container-fluid">
       <div class="row centered-form">
-        <div class="col-md-6">
+        <!-- Use Bootstrap column classes for responsiveness -->
+        <div class="col-12 col-md-6">
           <div class="card">
             <form method="POST" id="order-form">{% csrf_token %}
               <div class="form-group">
                 <label for="input2">Name On Order</label>
                 <select class="form-control" id="input2" name="name" required>
-                    <option value="" selected>Select your Name</option> <!-- Default option -->
+                    <option value="" selected>Select your Name</option>
                     {% for name in names %}
                       <option value="{{ name }}">{{ name }}</option>
                     {% endfor %}
@@ -54,7 +60,7 @@
               <div class="form-group">
                 <label for="input2">Order</label>
                 <select class="form-control" id="input2" name="order" required>
-                  <option value="" selected>Select your Order</option> <!-- Default option -->
+                  <option value="" selected>Select your Order</option>
                   {% for drink in drinks %}
                     <option value="{{ drink }}">{{ drink }}</option>
                   {% endfor %}
@@ -64,11 +70,10 @@
               <div class="form-group">
                 <label for="extras">Extras</label>
                 <select class="form-control" id="extras" name="extras" required>
-                  <option value="" selected>Select an Extra</option> <!-- Default option -->
-                  {%for extra in extras%}
-                  <option value="{{extra}}">{{extra}}</option>
-                  {%endfor%}
-                  <!-- ... other options ... -->
+                  <option value="" selected>Select an Extra</option>
+                  {% for extra in extras %}
+                    <option value="{{ extra }}">{{ extra }}</option>
+                  {% endfor %}
                 </select>
               </div>
 
@@ -83,6 +88,7 @@
         </div>
       </div>
     </div>
+
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/c474ed3681.js" crossorigin="anonymous"></script>
     <!-- jQuery -->
