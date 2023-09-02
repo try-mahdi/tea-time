@@ -57,6 +57,8 @@
                   <tr>
                     <th>Name on Order</th>
                     <th>Order</th>
+                    <th>Extra</th>
+                    <th>Sugar</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -64,6 +66,8 @@
                     <tr>
                       <td>{{ order.name }}</td>
                       <td>{{ order.order }}</td>
+                      <td>{{ order.extras }}</td>
+                      <td>{{ order.sugar }}</td>
                     </tr>
                   {% empty %}
                     <tr>

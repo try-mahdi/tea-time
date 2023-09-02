@@ -40,15 +40,43 @@
       <div class="row centered-form">
         <div class="col-md-6">
           <div class="card">
-            <form method="POST">{%csrf_token%}
+            <form method="POST" id="order-form">{% csrf_token %}
               <div class="form-group">
-                <label for="input1">Name On Order</label>
-                <input type="text" class="form-control" id="input1" name="name">
+                <label for="input2">Name On Order</label>
+                <select class="form-control" id="input2" name="name" required>
+                    <option value="" selected>Select your Name</option> <!-- Default option -->
+                    {% for name in names %}
+                      <option value="{{ name }}">{{ name }}</option>
+                    {% endfor %}
+                </select>
               </div>
+
               <div class="form-group">
                 <label for="input2">Order</label>
-                <input type="text" class="form-control" id="input2" name="order">
+                <select class="form-control" id="input2" name="order" required>
+                  <option value="" selected>Select your Order</option> <!-- Default option -->
+                  {% for drink in drinks %}
+                    <option value="{{ drink }}">{{ drink }}</option>
+                  {% endfor %}
+                </select>
               </div>
+
+              <div class="form-group">
+                <label for="extras">Extras</label>
+                <select class="form-control" id="extras" name="extras" required>
+                  <option value="" selected>Select an Extra</option> <!-- Default option -->
+                  {%for extra in extras%}
+                  <option value="{{extra}}">{{extra}}</option>
+                  {%endfor%}
+                  <!-- ... other options ... -->
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="sugar">Sugar</label>
+                <input type="number" class="form-control" id="sugar" name="sugar" value="0" min="0">
+              </div>
+
               <button type="submit" class="btn btn-primary" id="order-btn" onclick="sendOrder()">Place Order</button>
             </form>
           </div>

@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Page</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/admin_style.css' %}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Tea Time</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Order</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'view_orders' %}">View Orders</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="centered-form">
+  <div class="admin-card">
+    <h1>Admin Panel</h1>
+    
+    <!-- Form to add a new drink -->
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="add">
+      <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="Enter drink name">
+      </div>
+      <button type="submit" class="btn btn-primary">Add Drink</button>
+    </form>
+    
+    <!-- List of drinks -->
+    <ul>
+      {% for drink in drinks %}
+        <li>
+          {{ drink.name }}
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="drink_id" value="{{ drink.id }}">
+            <div class="form-group">
+              <input type="text" class="form-control" name="new_name" placeholder="New name">
+            </div>
+            <button type="submit" class="btn btn-secondary">Update</button>
+          </form>
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="drink_id" value="{{ drink.id }}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
