@@ -5,6 +5,8 @@
   <head>
     <meta charset="UTF-8">
     <title>View Orders</title>
+    <!-- Add the viewport meta tag for responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- Custom CSS -->
@@ -13,30 +15,34 @@
   <body>
 
     <style>
-        body {
-          background-image: url("{% static 'images/bg.jpg' %}" );
-          background-size: cover;
-          background-attachment: fixed;
-        }
-        
-        .container {
-          background-color: rgba(0, 0, 0, 0.8);
-          color: white;
-          padding: 20px;
-        }
-        
-        table {
-          color: white;
-        }
-      </style>
+      body {
+        background-image: url("{% static 'images/bg.jpg' %}");
+        background-size: cover;
+        background-attachment: fixed;
+      }
       
+      .container {
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px;
+      }
+      
+      table {
+        color: white;
+      }
+      #custom-white {
+    color: white;
+  }
+    </style>
+    
+    <!-- Use the Bootstrap responsive navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Tea Time</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="{% url 'index' %}">Order</a>
           </li>
@@ -47,40 +53,40 @@
       </div>
     </nav><br><br><br>
     
-    <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="text-center">View Orders</h1>
-            <div class="text-center">
-              <table class="table table-striped">
-                <thead>
+    <!-- Use the Bootstrap container class for responsiveness -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center" id="custom-white">View Orders</h1>
+          <div class="text-center">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name on Order</th>
+                  <th>Order</th>
+                  <th>Extra</th>
+                  <th>Sugar</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in orders %}
                   <tr>
-                    <th>Name on Order</th>
-                    <th>Order</th>
-                    <th>Extra</th>
-                    <th>Sugar</th>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.order }}</td>
+                    <td>{{ order.extras }}</td>
+                    <td>{{ order.sugar }}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {% for order in orders %}
-                    <tr>
-                      <td>{{ order.name }}</td>
-                      <td>{{ order.order }}</td>
-                      <td>{{ order.extras }}</td>
-                      <td>{{ order.sugar }}</td>
-                    </tr>
-                  {% empty %}
-                    <tr>
-                      <td colspan="2" class="text-center">No orders found.</td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+                {% empty %}
+                  <tr>
+                    <td colspan="2" class="text-center">No orders found.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      
+    </div>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/c474ed3681.js" crossorigin="anonymous"></script>
