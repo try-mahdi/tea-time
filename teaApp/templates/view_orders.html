@@ -49,39 +49,70 @@
     </nav><br><br><br>
     
     <div class="container">
-        <div class="row">
+      <div class="row">
           <div class="col-md-12">
-            <h1 class="text-center">View Orders</h1>
-            <div class="text-center">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Name on Order</th>
-                    <th>Order</th>
-                    <th>Extras</th>
-                    <th>Sugar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for order in orders %}
-                    <tr>
-                      <td>{{ order.name }}</td>
-                      <td>{{ order.order }}</td>
-                      <td>{{ order.extras }}</td>
-                      <td>{{ order.sugar }}</td>
-                    </tr>
-                  {% empty %}
-                    <tr>
-                      <td colspan="2" class="text-center">No orders found.</td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+              <h1 class="text-center">View Orders</h1>
+              <div class="text-center">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th>Name on Order</th>
+                              <th>Order</th>
+                              <th>Extras</th>
+                              <th>Sugar</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for order in orders %}
+                          <tr>
+                              <td>{{ order.name }}</td>
+                              <td>{{ order.order }}</td>
+                              <td>{{ order.extras }}</td>
+                              <td>{{ order.sugar }}</td>
+                              <td class="delete-cell">
+                                  <button class="btn btn-danger delete-button">Delete</button>
+                              </td>
+                          </tr>
+                          {% empty %}
+                          <tr>
+                              <td colspan="5" class="text-center">No orders found.</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
           </div>
-        </div>
       </div>
-      
+  </div>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const rows = document.querySelectorAll("tbody tr");
+    const deleteButtons = document.querySelectorAll(".delete-button");
+
+    rows.forEach((row, index) => {
+        row.addEventListener("click", () => {
+            // Hide all delete buttons
+            deleteButtons.forEach(button => button.style.display = "none");
+
+            // Show the delete button for the clicked row
+            const deleteButton = row.querySelector(".delete-button");
+            deleteButton.style.display = "block";
+        });
+
+        // Prevent the button click from triggering the row click
+        const deleteButton = row.querySelector(".delete-button");
+        deleteButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+            // Implement your delete logic here
+            // You can access the data for the row using the 'index'
+            // For example, orders[index] represents the data for the clicked row
+            console.log("Delete clicked for row", index);
+        });
+    });
+});
+
+  </script>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/c474ed3681.js" crossorigin="anonymous"></script>
@@ -92,6 +123,6 @@
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Custom JS -->
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{%static 'js/script.js'%}"></script>
   </body>
 </html>
